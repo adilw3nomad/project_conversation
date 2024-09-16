@@ -49,7 +49,7 @@ RSpec.feature "Project Conversations", type: :feature do
     expect(page).to have_content("Status changed to In Progress")
   end
 
-  scenario "Conversation items are paginated", js: true do
+  scenario "Conversation items are paginated" do
     21.times do |i|
       create(:comment, project: project, user: user, content: "Comment #{i}")
     end
