@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @pagy, @projects = pagy(Project.all, limit: 10)
   end
 
   def show
     @project = Project.find(params[:id])
-    @pagy, @conversation_items = pagy(@project.conversation_items.includes(:user), items: 10)
+    @pagy, @conversation_items = pagy(@project.conversation_items.includes(:user), limit: 10)
     @comment = Comment.new
   end
 
