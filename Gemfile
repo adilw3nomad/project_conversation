@@ -49,6 +49,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "capybara"
   gem "factory_bot_rails"
+  gem "pagy"
 end
 
 group :development do
