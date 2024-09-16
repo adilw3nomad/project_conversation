@@ -5,9 +5,11 @@ class Project < ApplicationRecord
 
   validates :name, presence: true
   validates :status, presence: true
+  DEFAULT_STATUSES = [ "Not Started", "In Progress", "Complete" ]
 
   def self.statuses
-    StatusChange.distinct.pluck(:new_status)
+    custom_statuses = StatusChange.pluck(:new_status).uniq
+    (DEFAULT_STATUSES + custom_statuses).uniq
   end
 
   def update_status(new_status, user)

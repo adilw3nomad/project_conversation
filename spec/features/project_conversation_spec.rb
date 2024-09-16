@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.feature "Project Conversations", type: :feature do
   let(:user) { create(:user) }
@@ -34,7 +35,7 @@ RSpec.feature "Project Conversations", type: :feature do
 
   scenario "User adds a comment to a project" do
     visit project_path(project)
-    fill_in "Add a comment", with: "This is a new comment"
+    fill_in "Your comment", with: "This is a new comment"
     click_button "Post Comment"
     expect(page).to have_content("Comment was successfully added")
     expect(page).to have_content("This is a new comment")
@@ -48,17 +49,16 @@ RSpec.feature "Project Conversations", type: :feature do
     expect(page).to have_content("Status changed to In Progress")
   end
 
-  scenario "Conversation items are paginated" do
+  scenario "Conversation items are paginated", js: true do
     21.times do |i|
       create(:comment, project: project, user: user, content: "Comment #{i}")
     end
 
     visit project_path(project)
     expect(page).to have_content("Comment 20")
-    expect(page).not_to have_content("Comment 0")
-
+    expect(page).not_to have_content("Comment 10")
     click_link "Next"
-    expect(page).to have_content("Comment 0")
+    expect(page).to have_content("Comment 10")
     expect(page).not_to have_content("Comment 20")
   end
 end

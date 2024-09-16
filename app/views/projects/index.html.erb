@@ -1,0 +1,18 @@
+<div class="container mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-6">Projects</h1>
+
+  <%= link_to 'New Project', new_project_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+
+  <div class="mt-8">
+    <% @projects.each do |project| %>
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h2 class="text-xl font-semibold">
+          <%= link_to project.name, project_path(project), class: 'text-blue-500 hover:text-blue-700' %>
+        </h2>
+        <p class="text-gray-600">Status: <%= project.status %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <%== pagy_nav(@pagy) %>
+</div>
