@@ -13,6 +13,19 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'capybara/rspec'
+require 'selenium-webdriver'
+
+Capybara.register_driver :selenium_firefox do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  options.add_argument('-headless')
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
+end
+
+Capybara.ignore_hidden_elements = false
+Capybara.enable_aria_label = true
+Capybara.javascript_driver = :selenium_firefox
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
