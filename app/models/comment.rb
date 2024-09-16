@@ -1,0 +1,2 @@
+class Comment < ConversationItem
+end
