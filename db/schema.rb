@@ -17,10 +17,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_16_163224) do
   create_table "conversation_items", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.bigint "user_id", null: false
-    t.string "type"
+    t.string "type", null: false
+    t.text "content"
+    t.string "new_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_conversation_items_on_project_id"
+    t.index ["type"], name: "index_conversation_items_on_type"
     t.index ["user_id"], name: "index_conversation_items_on_user_id"
   end
 
